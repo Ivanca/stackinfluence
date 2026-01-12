@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a1a1a; /* Dark background to match context */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Main Container for the overlapping layout */
+        .showcase-container {
+            position: relative;
+            width: 620px;
+            height: 600px;
+            /* The dark amorphous background shape */
+            background: #3e3838;
+            border-radius: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            overflow: hidden; /* Clips the background shape */
+        }
+
+        /* Shared Card Styles */
+        .card {
+            position: absolute;
+            background-color: #fdfdfd;
+            border-radius: 20px;
+            padding: 12px;
+            width: 260px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        /* Image Wrapper & Heart Badge */
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            border-radius: 16px;
+            overflow: visible; /* Allow heart to overflow */
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            background-color: #e0e0e0;
+            display: block;
+        }
+
+        .heart-badge {
+            position: absolute;
+            top: 20px;
+            left: -15px; /* Pulls it outside the image slightly */
+            background-color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .heart-badge svg {
+            width: 20px;
+            height: 20px;
+            fill: #ff6b6b;
+            scale: 1.2;
+            overflow: visible;
+        }
+
+        /* Card Content (Stats & Cart) */
+        .card-content {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 5px 5px 5px;
+        }
+
+        .stats {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .followers {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+            font-weight: 400;
+        }
+
+        .engagement {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.2;
+        }
+
+        .cart-btn {
+            background-color: #8bb19f; /* Sage green color */
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .cart-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        /* Specific Positioning */
+        
+        /* Top Center Card */
+        .card-top {
+            top: 40px;
+            left: 210px;
+            z-index: 3;
+            animation: scaleBounce 1s 1.7s ease-out both;
+
+
+
+
+        }
+
+        /* Bottom Left Card */
+        .card-left {
+            bottom: 90px;
+            left: 59px;
+            z-index: 2;
+            animation: scaleBounce 1s 1s ease-out both;
+
+        }
+        
+
+        /* Bottom Right Card */
+        .card-right {
+            bottom: 40px;
+            right: 40px;
+            z-index: 3;
+            animation: scaleBounce 1s 2.5s ease-out both;
+
+        }
+
+        
+@keyframes scaleBounce {
+  /* Start completely scaled down and off-screen vertically */
+  0% {
+    transform: scale(0) translateY(100px);
+    opacity: 0;
+  }
+  /* Scale up and overshoot slightly at the peak of the "bounce" */
+  50% {
+    transform: scale(1.1) translateY(-20px);
+    opacity: 1;
+    /* Use ease-out for the upward motion */
+    animation-timing-function: ease-out;
+  }
+  /* Land back at the final scale, maybe slightly squashed for realism */
+  70% {
+    transform: scale(0.95) translateY(0);
+    animation-timing-function: ease-in;
+  }
+  /* Final resting state with a small secondary bounce */
+  85% {
+    transform: scale(1.05) translateY(-10px);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    animation-timing-function: ease-in;
+  }
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="showcase-container">
+        
+        <!-- CARD 1 (Top Center) -->
+        <div class="card card-top">
+            <div class="image-wrapper">
+                <img src="image-center.png" alt="Influencer 1" class="placeholder-img">
+                <div class="heart-badge">
+                    <!-- Heart SVG -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="stats">
+                    <span class="followers">14,113 followers</span>
+                    <span class="engagement">7% engagement</span>
+                </div>
+                <!-- Cart is missing in top card in original image, but consistent style suggests it could be there, or just blank. 
+                     The original image actually cuts off the bottom of the top card. 
+                     I will leave the cart out for the top card to match visual accuracy of 'obscured' view, 
+                     or we can add it. Let's add it for consistency but maybe hide it? 
+                     Actually, let's keep the layout uniform. -->
+                 <!-- <div class="cart-btn">...</div> (Hidden/Obscured in reference) -->
+            </div>
+        </div>
+
+        <!-- CARD 2 (Left) -->
+        <div class="card card-left">
+            <div class="image-wrapper">
+                <img src="image-left.png" alt="Influencer 2" class="placeholder-img">
+                <div class="heart-badge">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="stats">
+                    <span class="followers">5,321 followers</span>
+                    <span class="engagement">11% engagement</span>
+                </div>
+                <div class="cart-btn">
+                    <!-- Shopping Cart SVG -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 3 (Right) -->
+        <div class="card card-right">
+            <div class="image-wrapper">
+                <img src="image-right.png" alt="Influencer 3" class="placeholder-img">
+                <div class="heart-badge">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="stats">
+                    <span class="followers">11,574 followers</span>
+                    <span class="engagement">9% engagement</span>
+                </div>
+                <div class="cart-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
